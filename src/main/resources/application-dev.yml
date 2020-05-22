@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  max-http-header-size: 100000
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    mode: HTML
+    cache: false
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+  datasource:
+    name:
+    url: jdbc:你的数据库连接
+    driver-class-name: com.mysql.cj.jdbc.Driver//此处为mysql 8.0连接名
+    username: root用户
+    password: 密码
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    call-setters-on-nulls: false
+
+

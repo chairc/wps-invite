@@ -1,3 +1,3 @@
 # wps-invite
 
-## wps每日自动邀请好友
+## wps鑷姩閭�璇峰ソ鍙媠pringboot椤圭洰

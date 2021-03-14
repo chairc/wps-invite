@@ -12,14 +12,15 @@ spring:
       content-type: text/html
   datasource:
     name:
-    url: jdbc:你的数据库连接
-    driver-class-name: com.mysql.cj.jdbc.Driver//此处为mysql 8.0连接名
-    username: root用户
-    password: 密码
+    url: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: 
+    password: 
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     call-setters-on-nulls: false
 
-
+wps:
+  wps-invite-path: https://zt.wps.cn/2018/clock_in/api/invite

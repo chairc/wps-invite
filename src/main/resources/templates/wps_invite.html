@@ -5,14 +5,35 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
     <style>
-        .message-box-warp{width: 100%;position: fixed;top:0;left: 0;text-align: center;z-index: 1000000;transform: translateY(10%);}
-        .message-box{width: calc(320px);height: calc(60px);display: none;margin: 0 auto;padding: 0 20px 0 20px;text-align: center;border: 1px transparent;border-radius: 4px;background: inherit;line-height: 60px;box-shadow: 0 2px 6px 0 rgba(0,0,0,.12), inset 0 -1px 0 0 #dadce0;}
+        .message-box-warp {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            z-index: 1000000;
+            transform: translateY(10%);
+        }
+
+        .message-box {
+            width: calc(320px);
+            height: calc(60px);
+            display: none;
+            margin: 0 auto;
+            padding: 0 20px 0 20px;
+            text-align: center;
+            border: 1px transparent;
+            border-radius: 4px;
+            background: inherit;
+            line-height: 60px;
+            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12), inset 0 -1px 0 0 #dadce0;
+        }
     </style>
 </head>
 <body>
 <div>
     <input id="uid" name="uid" type="text"/>
-    <button onclick="wps_invite()">提交</button>
+    <button id="wps-btn" onclick="wpsInvite()">提交</button>
 </div>
 <div class="message-box-warp">
     <div id="message-box" class="message-box">
@@ -22,8 +43,9 @@
 </body>
 <script type="text/javascript" th:src="@{/static/js/jquery-min.js}"></script>
 <script>
-    function wps_invite() {
+    function wpsInvite() {
         var uid = $("#uid").val();
+        $("#wps-btn").attr("disabled","disabled");
         $.ajax({
             url: "/wpsAutoInviteByAjax",
             dataType: "JSON",
@@ -33,14 +55,14 @@
             },
             success: function (data) {
                 console.log(data);
-                if (data.result === "1") {
+                if (data.code === "200") {
                     //提交成功
-                    $("#message-box-text").html("邀请成功")
+                    $("#message-box-text").html(data.msg);
                     $("#message-box").css("color", "#d7f7ff");
                     $("#message-box").css("background", "#1a95ff");
-                } else if (data.result === "0") {
+                } else {
                     //提交失败
-                    $("#message-box-text").html("邀请失败")
+                    $("#message-box-text").html(data.msg);
                     $("#message-box").css("color", "#a94442");
                     $("#message-box").css("background", "#f2dede");
                 }
@@ -52,6 +74,7 @@
                 } else {
                     $('#message-box').slideUp(300);
                 }
+                $("#wps-btn").removeAttr("disabled");
             }
         })
     }

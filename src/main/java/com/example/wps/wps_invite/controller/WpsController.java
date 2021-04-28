@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @auther chairc
+ * @date 2020/5/22 16:43
+ */
 @Controller
 public class WpsController {
 

@@ -1,8 +1,8 @@
 package com.example.wps.wps_invite.entity;
 
 /**
- * @auther chenyu
- * @date 2021/1/14 20:44
+ * @auther chairc
+ * @date 2021/2/28 21:43
  */
 //返回前端的验证结果集
 public class ResultSet {

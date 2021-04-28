@@ -1,30 +1,26 @@
 package com.example.wps.wps_invite.entity;
 
+/**
+ * @auther chairc
+ * @date 2020/5/22 16:43
+ */
 public class Wps {
-    private int wps_id;
-    private String wps_sid;
+    private int wpsId;
+    private String wpsSid;
 
-    public int getWps_id() {
-        return wps_id;
+    public int getWpsId() {
+        return wpsId;
     }
 
-    public void setWps_id(int wps_id) {
-        this.wps_id = wps_id;
+    public void setWpsId(int wpsId) {
+        this.wpsId = wpsId;
     }
 
-    public String getWps_sid() {
-        return wps_sid;
+    public String getWpsSid() {
+        return wpsSid;
     }
 
-    public void setWps_sid(String wps_sid) {
-        this.wps_sid = wps_sid;
-    }
-
-    @Override
-    public String toString() {
-        return "Entertainment{" +
-                "wps_id=" + wps_id +
-                ", wps_sid='" + wps_sid + '\'' +
-                '}';
+    public void setWpsSid(String wpsSid) {
+        this.wpsSid = wpsSid;
     }
 }

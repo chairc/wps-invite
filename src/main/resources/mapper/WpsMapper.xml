@@ -2,13 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.wps.wps_invite.mapper.WpsMapper">
     <!--关于ResultMap 如果实体类与数据库的行相同则不用写，反之则需要写ResultMap-->
-    <sql id="table">cc_blog_wps</sql>
+    <resultMap id="WpsResultMap" type="com.example.wps.wps_invite.entity.Wps">
+        <id column="wps_id" property="wpsId"></id>
+        <result column="wps_sid" property="wpsSid"></result>
+    </resultMap>
 
-    <select id="getWpsSidAll" resultType="com.example.wps.wps_invite.entity.Wps">
+    <sql id="table">wps_sid</sql>
+
+    <select id="getWpsSidAll" resultType="com.example.wps.wps_invite.entity.Wps" resultMap="WpsResultMap">
         SELECT
         *
         FROM
         <include refid="table"/>
     </select>
+
+    <insert id="insertInviteSid" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (wps_sid)
+        VALUES
+        (#{sid})
+    </insert>
 
 </mapper>

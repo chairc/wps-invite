@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wps.wps_invite.mapper.ClientCodeMapper">
+    <!--关于ResultMap 如果实体类与数据库的行相同则不用写，反之则需要写ResultMap-->
+    <resultMap id="ClientCodeResultMap" type="com.example.wps.wps_invite.entity.ClientCode">
+        <id column="id" property="id"></id>
+        <result column="client_code" property="clientCode"></result>
+        <result column="client" property="client"></result>
+    </resultMap>
+
+    <sql id="table">client_code</sql>
+
+    <select id="getClientCode" resultType="com.example.wps.wps_invite.entity.ClientCode"
+            resultMap="ClientCodeResultMap">
+        SELECT
+        *
+        FROM
+        <include refid="table"/>
+        ORDER BY id
+        DESC
+        LIMIT 1
+    </select>
+
+    <insert id="insertClientCode" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (client_code,client)
+        VALUES
+        (#{clientCode},#{client})
+    </insert>
+
+</mapper>

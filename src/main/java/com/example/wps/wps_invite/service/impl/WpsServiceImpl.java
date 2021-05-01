@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * @auther chairc
  * @date 2020/5/22 16:43
@@ -37,7 +38,7 @@ public class WpsServiceImpl implements WpsService {
     private ClientCodeMapper clientCodeMapper;
 
     @Autowired
-    public WpsServiceImpl(WpsMapper wpsMapper,ClientCodeMapper clientCodeMapper) {
+    public WpsServiceImpl(WpsMapper wpsMapper, ClientCodeMapper clientCodeMapper) {
         this.wpsMapper = wpsMapper;
         this.clientCodeMapper = clientCodeMapper;
     }
@@ -64,8 +65,8 @@ public class WpsServiceImpl implements WpsService {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, String> map = new HashMap<>();
             map.put("invite_userid", uid);
-            map.put("client_code",clientCode);
-            map.put("client",client);
+            map.put("client_code", clientCode);
+            map.put("client", client);
             //转成json格式
             String mapToJson = mapper.writeValueAsString(map);
             StringBuilder sb = new StringBuilder();
@@ -99,23 +100,43 @@ public class WpsServiceImpl implements WpsService {
                         HashMap hashMap = objectMapper.readValue(tmpLine, HashMap.class);
                         String result = (String) hashMap.get("result");
                         if (result.equals("ok")) {
-                            System.out.println("当前返回值:" + tmpLine);
+                            System.out.println("return value:" + tmpLine);
                         }
                     } catch (Exception e) {
-                        System.out.println("当前sid:" + wps.getWpsSid() + "已失效");
+                        System.out.println("sid:" + wps.getWpsSid() + "has been invalid");
                     }
                 }
                 conn.disconnect();
                 //设置暂停的时间 2 秒
                 Thread.sleep(2 * 1000);
             }
-            resultSet.ok("success");
-            log.info("success");
-            return resultSet;
+            resultSet.ok("invite success");
+            log.info("invite success");
         } catch (IOException | InterruptedException e) {
-            log.error("error:{}", e.toString());
-            resultSet.fail("error");
-            return resultSet;
+            log.error("invite error:{}", e.toString());
+            resultSet.fail("invite error");
         }
+        return resultSet;
+    }
+
+    /**
+     * 新增sid
+     *
+     * @param sid sid
+     * @return 成功或异常
+     */
+
+    @Override
+    public ResultSet insertInviteSid(String sid) {
+        ResultSet resultSet = new ResultSet();
+        try {
+            wpsMapper.insertInviteSid(sid);
+            resultSet.ok("insert sid success");
+            log.info("insert sid success");
+        } catch (Exception e) {
+            log.error("insert sid error:{}", e.toString());
+            resultSet.fail("insert sid error");
+        }
+        return resultSet;
     }
 }

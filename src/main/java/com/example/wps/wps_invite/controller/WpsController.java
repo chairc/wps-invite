@@ -56,4 +56,16 @@ public class WpsController {
     public ResultSet wpsAutoInviteByAjax(@RequestParam(value = "uid", required = false) String uid) {
         return wpsService.wpsAutoInvite(uid);
     }
+
+    /**
+     * 添加Sid接口
+     * @param sid sid号
+     * @return 是否成功
+     */
+
+    @RequestMapping("/insertInviteSid")
+    @ResponseBody
+    public ResultSet insertInviteSid(@RequestParam(value = "sid",required = false)String sid){
+        return wpsService.insertInviteSid(sid);
+    }
 }

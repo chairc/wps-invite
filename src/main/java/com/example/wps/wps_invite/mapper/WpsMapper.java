@@ -11,5 +11,8 @@ import java.util.List;
  */
 @Mapper
 public interface WpsMapper {
+
     List<Wps> getWpsSidAll();
+
+    void insertInviteSid(String sid);
 }
